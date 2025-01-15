@@ -63,6 +63,7 @@ def auto_click():
             pyautogui.sleep(random.uniform(0, random_delay_range))
         # 按照用户设置的间隔时间进行点击
         pyautogui.sleep(click_interval)
+        pyautogui.moveTo(x//random.uniform(1, 2), y//random.uniform(1, 2), duration=0.25)
 
 def on_key_event(event):
     if event.name == 'esc':
