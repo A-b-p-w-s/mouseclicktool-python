@@ -55,7 +55,7 @@ def auto_click():
         dy = random.randint(-offset_y, offset_y)
         if offset_button:
             # 移动鼠标到偏移后的位置
-            pyautogui.moveTo(x + dx, y + dy)
+            pyautogui.moveTo(x + dx, y + dy, duration=0.25)
         # 模拟鼠标点击
         pyautogui.click()
         # 如果启用随机时间延迟，则添加随机延迟
@@ -75,7 +75,7 @@ keyboard.hook(on_key_event)
 
 # 创建主窗口
 root = tk.Tk()
-root.title("阴阳师鼠标连点器")
+root.title("鼠标连点器")
 root.geometry("300x200")
 
 # 创建一个Frame容器
