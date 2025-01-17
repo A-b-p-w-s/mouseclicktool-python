@@ -16,31 +16,33 @@ random_delay_range = 2  # 随机时间延迟范围，单位为秒
 
 def start_clicking():
     global clicking, click_interval, random_delay, random_delay_range,offset_x,offset_y,offset_button
-    clicking = True
     # 获取文本框中的连点间隔时间
     try:
-        interval = float(interval_entry.get())
-        if interval <= 0:
-            raise ValueError
-        click_interval = interval
-        random_delay = random_delay_var.get()
-        # 获取随机时间延迟范围
-        if random_delay_var.get():
-            random_delay_range = float(random_delay_entry.get())
-            if random_delay_range <= 0:
+        if not clicking:
+            interval = float(interval_entry.get())
+            if interval <= 0:
                 raise ValueError
-        offset_button = offset_button_var.get()
-        # 获取随机偏移量
-        if offset_button_var.get():
-            offset_x = int(offset_button_entry.get())
-            offset_y = int(offset_button_entry.get())
-            if offset_x <= 0 or offset_y <= 0:
-                raise ValueError
+            click_interval = interval
+            random_delay = random_delay_var.get()
+            # 获取随机时间延迟范围
+            if random_delay_var.get():
+                random_delay_range = float(random_delay_entry.get())
+                if random_delay_range <= 0:
+                    raise ValueError
+            offset_button = offset_button_var.get()
+            # 获取随机偏移量
+            if offset_button_var.get():
+                offset_x = int(offset_button_entry.get())
+                offset_y = int(offset_button_entry.get())
+                if offset_x <= 0 or offset_y <= 0:
+                    raise ValueError
     except ValueError:
         messagebox.showerror("输入错误", "请输入一个大于0的数字")
         return
-    # 使用线程避免阻塞GUI
-    threading.Thread(target=auto_click).start()
+    if not clicking:
+        # 使用线程避免阻塞GUI
+        threading.Thread(target=auto_click).start()
+    clicking = True
 
 def stop_clicking():
     global clicking
